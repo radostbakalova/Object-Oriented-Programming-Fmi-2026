@@ -10,9 +10,9 @@
 - `threat` - ниво на заплаха (0–10); при невалидна стойност се хвърля `std::invalid_argument`
 
 Задължителни виртуални методи:
-- `getType() const → std::string`
+- `string getType() const`
 - `print() const`
-- `clone() const → std::unique_ptr<Landmark>` - полиморфно клониране
+- `unique_ptr<Landmark> clone() const` - полиморфно клониране
 
 Конкретни наследници:
 
@@ -53,7 +53,7 @@ static std::unique_ptr<Landmark> create(
 Основни методи:
 - `addLandmark(unique_ptr<Landmark>)`
 - `unique_ptr<Landmark> removeLandmark(const std::string& name)` - връща извадената забележителност; хвърля `std::invalid_argument`, ако не е намерена
-- `setDangerLevel(int)` - ниво 1–10; хвърля `std::out_of_range`, ако е невалидно
+- `setDangerLevel(int)` - ниво 1–10; хвърля `std::invalid_argument`, ако е невалидно
 - `bool hasLandmark(const std::string& name) const`
 - `print() const`
 
@@ -75,9 +75,24 @@ Command                   (абстрактен)
 - `undo(Territory&)`
 - `string description() const`
 
-`EditLog` пази история от команди и препратка към целевата `Territory`. Методи: `execute(unique_ptr<Command>)`, `undo()`, `printHistory()`.
+`EditLog` пази указател към целевата `Territory` и история от команди. Методи: `execute(unique_ptr<Command>)`, `undo()`, `printHistory()`.
 
 **Важно:** ако две карти споделят `Territory`, техните `EditLog` обекти сочат към един и същи обект - `execute()` през едната е видимо от другата.
+
+---
+
+### CommandFactory
+
+Командите не се конструират директно - създават се чрез `CommandFactory` по тип, зададен като стринг:
+
+```cpp
+static std::unique_ptr<Command> create(
+    const std::string& type, // "add" | "remove" | "danger"
+    const std::string& args  // зависи от типа - вижте по-долу
+);
+```
+
+При непознат тип се хвърля `std::invalid_argument`. `"add"` делегира парсването на `LandmarkFactory`.
 
 ---
 
@@ -121,3 +136,4 @@ Command                   (абстрактен)
 5. Добавете забележителност към `"Expedition Copy"`. Покажете, че `"Northern Survey"` **не** я вижда.
 6. Отменете последната промяна върху `"Expedition Copy"`. Потвърдете, че забележителността е изчезнала.
 7. Извикайте `unlink()` върху `"Northern Survey"`. Отпечатайте `use_count` преди и след.
+
