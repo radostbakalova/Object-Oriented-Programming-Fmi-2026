@@ -113,12 +113,12 @@ MinimumCoursesFromCategoryRequirement programmingCourses(
 ```cpp
 class RequirementFactory {
 public:
-    static AdmissionRequirement* createMinimumCredits(int credits);
-    static AdmissionRequirement* createMinimumAverageGrade(double grade);
-    static AdmissionRequirement* createMinimumCoursesFromCategory(
+    static <УМЕН УКАЗАТЕЛ> createMinimumCredits(int credits);
+    static <УМЕН УКАЗАТЕЛ> createMinimumAverageGrade(double grade);
+    static <УМЕН УКАЗАТЕЛ>* createMinimumCoursesFromCategory(
         CourseCategory category, int count);
-    static AdmissionRequirement* createNoFailedMandatoryCourses();
-    static AdmissionRequirement* createMaximumRemainingElectives(int maxCount);
+    static <УМЕН УКАЗАТЕЛ> createNoFailedMandatoryCourses();
+    static <УМЕН УКАЗАТЕЛ> createMaximumRemainingElectives(int maxCount);
     // ...
 };
 ```
