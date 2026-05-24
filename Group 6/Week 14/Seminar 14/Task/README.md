@@ -57,7 +57,7 @@
 class AdmissionRequirement {
 public:
     virtual ~AdmissionRequirement() = default;
-    virtual AdmissionRequirement* clone() const = 0;
+    virtual <УМЕН УКАЗАТЕЛ> clone() const = 0;
     virtual RequirementCheckResult check(const Student& student) const = 0;
 };
 ```
@@ -67,8 +67,8 @@ public:
 ```cpp
 class MinimumCreditsRequirement : public AdmissionRequirement {
 public:
-    MinimumCreditsRequirement* clone() const override {
-        return new MinimumCreditsRequirement(*this);
+    <УМЕН УКАЗАТЕЛ> clone() const override {
+        return <УМЕН УКАЗАТЕЛ>;
     }
     // ...
 };
