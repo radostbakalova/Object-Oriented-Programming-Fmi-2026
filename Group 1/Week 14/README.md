@@ -27,4 +27,8 @@
 - `grade(<test>)`
 - `createTest`
 
-Създайте собствена грешка с името `QuizError`. Тя има три наследника: `QuizNotTakenError`, `QuizAlreadyTakenError` и `NoSuchQuestionInQuizError`.
+Създайте собствена грешка с името `QuizError`. Тя има следните наследници: 
+- `QuizNotTakenError`
+- `QuizAlreadyTakenError`
+- `NoSuchQuestionInQuizError`
+- `WrongAnswerError`
