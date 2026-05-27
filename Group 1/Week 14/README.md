@@ -31,4 +31,4 @@
 - `QuizNotTakenError`
 - `QuizAlreadyTakenError`
 - `NoSuchQuestionInQuizError`
-- `WrongAnswerError`
+- `WrongAnswerTypeError`
